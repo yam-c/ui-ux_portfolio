@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="지민우 — UI/UX Portfolio · VISCOPER · SafeWatcher" />
+  <title>지민우 · UI/UX Portfolio</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css');
+
+    :root {
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --line: rgba(17, 24, 39, 0.08);
+      --viscoper: #6366f1;
+      --viscoper-soft: rgba(99, 102, 241, 0.1);
+      --viscoper-glow: rgba(34, 211, 238, 0.35);
+      --safe: #0d9488;
+      --safe-soft: rgba(13, 148, 136, 0.1);
+      --safe-glow: rgba(45, 212, 191, 0.3);
+      --radius: 16px;
+      --shadow: 0 24px 64px rgba(17, 24, 39, 0.08);
+      --media-shadow: 0 20px 50px -16px rgba(17, 24, 39, 0.14);
+      --media-shadow-sm: 0 12px 32px -12px rgba(17, 24, 39, 0.1);
+      --max: 1120px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      font-family: 'Pretendard Variable', 'Pretendard', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: rgba(99, 102, 241, 0.25); }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; height: auto; }
+    button { font: inherit; cursor: pointer; border: none; background: none; }
+
+    .wrap { width: min(var(--max), calc(100% - 48px)); margin-inline: auto; }
+
+    /* Header */
+    .header {
+      position: fixed; inset: 0 0 auto; z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(250, 250, 250, 0.82);
+      border-bottom: 1px solid var(--line);
+    }
+    .header__inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-size: 14px; font-weight: 800; letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--muted); font-weight: 600; }
+    .nav { display: flex; gap: 28px; }
+    .nav a {
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav a:hover { color: var(--text); }
+
+    /* Hero */
+    .hero {
+      padding: 140px 0 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: -20% -10% auto;
+      height: 520px;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 40%, var(--viscoper-soft), transparent),
+        radial-gradient(ellipse 50% 40% at 80% 20%, var(--safe-soft), transparent);
+      pointer-events: none;
+    }
+    .hero__eyebrow {
+      position: relative;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+    }
+    .hero h1 {
+      position: relative;
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 800; letter-spacing: -0.04em; line-height: 1.15;
+      max-width: 720px; margin-bottom: 24px;
+    }
+    .hero__desc {
+      position: relative;
+      font-size: 18px; color: var(--muted); max-width: 560px;
+    }
+
+    /* Section */
+    .section { padding: 80px 0; }
+    .section--divider { border-top: 1px solid var(--line); }
+    .section__label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .section__label--viscoper { color: var(--viscoper); }
+    .section__label--safe { color: var(--safe); }
+    .section__label::before {
+      content: ''; width: 20px; height: 2px; border-radius: 2px;
+    }
+    .section__label--viscoper::before { background: var(--viscoper); }
+    .section__label--safe::before { background: var(--safe); }
+    .section__title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 800; letter-spacing: -0.03em; line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .section__lead {
+      font-size: 16px; color: var(--muted); max-width: 640px;
+      margin-bottom: 48px;
+    }
+
+    /* Project hero image */
+    .showcase {
+      border-radius: 20px; overflow: hidden;
+      box-shadow: var(--media-shadow);
+      background: #0f172a;
+      margin-bottom: 56px;
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+    }
+    .showcase img {
+      width: 100%; cursor: zoom-in;
+      transition: opacity 0.25s;
+    }
+    .showcase:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 28px 60px -14px rgba(17, 24, 39, 0.18);
+    }
+    .showcase:hover img { opacity: 0.97; }
+    .showcase figcaption {
+      padding: 14px 20px; font-size: 13px; color: var(--muted);
+      background: var(--surface);
+    }
+
+    /* Features */
+    .features { display: flex; flex-direction: column; gap: 64px; }
+    .feature {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 40px; align-items: center;
+    }
+    .feature--reverse { direction: rtl; }
+    .feature--reverse > * { direction: ltr; }
+    .feature__content { padding: 8px 0; }
+    .feature__step {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+    .feature__step--viscoper { color: var(--viscoper); }
+    .feature__step--safe { color: var(--safe); }
+    .feature h3 {
+      font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 12px; line-height: 1.35;
+    }
+    .feature p { font-size: 15px; color: var(--muted); }
+    .feature__visual {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: var(--media-shadow-sm);
+      background: #0f172a;
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+    }
+    .feature__visual:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--media-shadow);
+    }
+    .feature__visual img { width: 100%; cursor: zoom-in; }
+
+    /* Gallery */
+    .gallery {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .gallery__item {
+      border-radius: 12px; overflow: hidden;
+      background: var(--surface);
+      box-shadow: var(--media-shadow-sm);
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+    }
+    .gallery__item--wide { grid-column: 1 / -1; }
+    .gallery__item img { width: 100%; cursor: zoom-in; transition: opacity 0.2s; }
+    .gallery__item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--media-shadow);
+    }
+    .gallery__item:hover img { opacity: 0.96; }
+    .gallery__item figcaption {
+      padding: 12px 16px; font-size: 12px; color: var(--muted);
+    }
+
+    /* SafeWatcher dual demo */
+    .dual-demo {
+      display: grid; grid-template-columns: 260px 1fr;
+      gap: 20px; align-items: start;
+      margin-bottom: 56px;
+    }
+    .dual-demo__mobile {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: var(--media-shadow-sm);
+      background: #0d1012;
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+    }
+    .dual-demo__mobile:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--media-shadow);
+    }
+    .dual-demo__mobile img { width: 100%; aspect-ratio: 9/16; object-fit: cover; cursor: zoom-in; }
+    .dual-demo__pc {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: var(--media-shadow-sm);
+      background: #0d1012;
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+    }
+    .dual-demo__pc:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--media-shadow);
+    }
+    .dual-demo__pc img { width: 100%; aspect-ratio: 16/9; object-fit: cover; cursor: zoom-in; }
+    .dual-demo figcaption {
+      padding: 12px 16px; font-size: 12px; color: var(--muted);
+      background: var(--surface);
+    }
+
+    /* Footer */
+    .footer {
+      padding: 48px 0 64px;
+      border-top: 1px solid var(--line);
+      text-align: center;
+    }
+    .footer p { font-size: 13px; color: var(--muted); }
+    .footer a { color: var(--text); font-weight: 600; }
+    .footer a:hover { color: var(--viscoper); }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 200;
+      display: none; align-items: center; justify-content: center;
+      padding: 48px 24px;
+      background: rgba(10, 10, 15, 0.92);
+      backdrop-filter: blur(8px);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 94vw; max-height: 88vh;
+      object-fit: contain; border-radius: 12px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45);
+    }
+    .lightbox__close {
+      position: absolute; top: 20px; right: 20px;
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff; font-size: 24px;
+    }
+    .lightbox__label {
+      position: absolute; top: 28px; left: 24px;
+      font-size: 13px; color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Mobile menu */
+    .menu-btn { display: none; width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); }
+
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .menu-btn { display: grid; place-items: center; }
+      body.nav-open .nav {
+        display: flex; flex-direction: column; gap: 16px;
+        position: absolute; top: 64px; left: 0; right: 0;
+        padding: 20px 24px; background: var(--surface);
+        border-bottom: 1px solid var(--line);
+      }
+      .feature, .feature--reverse { grid-template-columns: 1fr; direction: ltr; }
+      .dual-demo { grid-template-columns: 1fr; }
+      .dual-demo__mobile { max-width: 280px; margin: 0 auto; }
+    }
+    @media (max-width: 600px) {
+      .wrap { width: calc(100% - 32px); }
+      .hero { padding: 120px 0 60px; }
+      .section { padding: 60px 0; }
+      .gallery { grid-template-columns: 1fr; }
+      .gallery__item--wide { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="wrap header__inner">
+      <a class="logo" href="#">지민우 <span>/ UI/UX Portfolio</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="메뉴">☰</button>
+      <nav class="nav" id="nav">
+        <a href="#viscoper">VISCOPER</a>
+        <a href="#safewatcher">SafeWatcher</a>
+        <a href="mailto:y2601943@g.yju.ac.kr">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="hero__eyebrow reveal">UI/UX Portfolio</p>
+        <h1 class="reveal">AI 영상관제 플랫폼<br>UI/UX 작업물</h1>
+        <p class="hero__desc reveal">
+          VISCOPER와 SafeWatcher 프로젝트의 화면 설계와 인터랙션을 모았습니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- VISCOPER -->
+    <section class="section section--divider" id="viscoper">
+      <div class="wrap">
+        <span class="section__label section__label--viscoper reveal">Project 01</span>
+        <h2 class="section__title reveal">VISCOPER</h2>
+        <p class="section__lead reveal">
+          AI 위험감지와 GIS를 결합한 CCTV 통합관제 플랫폼.
+          지도·스트리밍·이벤트 설정·통계·AI 어시스턴트까지 이어지는 화면 흐름입니다.
+        </p>
+
+        <figure class="showcase reveal">
+          <img src="assets/viscoper/01-overview.png" alt="VISCOPER 지도 기반 통합관제 화면" data-lightbox />
+          <figcaption>GIS 기반 CCTV 통합관제 메인 화면 — 지역 트리, 지도, 상세 패널 레이아웃</figcaption>
+        </figure>
+
+        <div class="features">
+          <article class="feature reveal">
+            <div class="feature__content">
+              <p class="feature__step feature__step--viscoper">01 · CONTROL</p>
+              <h3>지도와 스트리밍을 오가는 실시간 관제</h3>
+              <p>위치 맥락은 지도에서, 다채널 영상은 스트리밍 그리드에서 확인합니다. 좌측 지역 트리와 카메라 상태를 연결해 탐색 경로를 줄였습니다.</p>
+            </div>
+            <figure class="feature__visual">
+              <img src="assets/viscoper/04-map.png" alt="지도 관제 화면" data-lightbox />
+            </figure>
+          </article>
+
+          <article class="feature feature--reverse reveal">
+            <div class="feature__content">
+              <p class="feature__step feature__step--viscoper">02 · STREAM</p>
+              <h3>멀티채널 실시간 영상 모니터링</h3>
+              <p>여러 CCTV 채널을 동시에 모니터링하는 그리드 뷰를 구현하고, 채널별 상태와 영상 전환 UX를 설계했습니다.</p>
+            </div>
+            <figure class="feature__visual">
+              <img src="assets/viscoper/04-stream.png" alt="멀티채널 스트리밍 화면" data-lightbox />
+            </figure>
+          </article>
+
+          <article class="feature reveal">
+            <div class="feature__content">
+              <p class="feature__step feature__step--viscoper">03 · DETECTION</p>
+              <h3>영상 위 감지 영역·선 편집</h3>
+              <p>전체·다각형·사각형·단방향·양방향 등 서로 다른 규칙을 하나의 편집 화면에서 관리할 수 있도록 구현했습니다.</p>
+            </div>
+            <figure class="feature__visual">
+              <img src="assets/viscoper/04-event-setting.png" alt="이벤트 감지 영역 설정" data-lightbox />
+            </figure>
+          </article>
+
+          <article class="feature feature--reverse reveal">
+            <div class="feature__content">
+              <p class="feature__step feature__step--viscoper">04 · INSIGHT</p>
+              <h3>위험감지 통계와 분석 리포트</h3>
+              <p>시간대·요일·이벤트 유형별 추이를 시각화하고, 조회 조건을 보고서 출력 흐름까지 유지해 화면 분석과 문서 공유가 이어지도록 구성했습니다.</p>
+            </div>
+            <figure class="feature__visual">
+              <img src="assets/viscoper/05-analytics.png" alt="위험감지 통계 대시보드" data-lightbox />
+            </figure>
+          </article>
+
+          <article class="feature reveal">
+            <div class="feature__content">
+              <p class="feature__step feature__step--viscoper">05 · AI ASSISTANT</p>
+              <h3>자연어 시스템 안내 AI 어시스턴트</h3>
+              <p>사용자가 필요한 메뉴와 기능을 스스로 찾아갈 수 있도록, Python LLM 기반 사전형 안내 기능을 제공합니다.</p>
+            </div>
+            <figure class="feature__visual">
+              <img src="assets/viscoper/09-llm.png" alt="AI 어시스턴트 화면" data-lightbox />
+            </figure>
+          </article>
+        </div>
+
+        <h3 class="section__title reveal" style="font-size:24px;margin-top:72px;margin-bottom:24px;">화면 갤러리</h3>
+        <div class="gallery reveal">
+          <figure class="gallery__item"><img src="assets/viscoper/02-login.png" alt="로그인 화면" data-lightbox /><figcaption>서비스 진입 · 핵심 가치 안내</figcaption></figure>
+          <figure class="gallery__item"><img src="assets/viscoper/03-layout.png" alt="전체 레이아웃" data-lightbox /><figcaption>사이드바 · 지도 · 상세 패널</figcaption></figure>
+          <figure class="gallery__item"><img src="assets/viscoper/06-cctv.png" alt="CCTV 설정" data-lightbox /><figcaption>CCTV 장비 · RTSP 경로 관리</figcaption></figure>
+          <figure class="gallery__item"><img src="assets/viscoper/06-user.png" alt="사용자 설정" data-lightbox /><figcaption>계정 · 권한 · 사용 상태</figcaption></figure>
+          <figure class="gallery__item"><img src="assets/viscoper/05-risk-history.png" alt="위험감지 이력" data-lightbox /><figcaption>위험감지 이력 조회</figcaption></figure>
+          <figure class="gallery__item"><img src="assets/viscoper/08-schedule.png" alt="스케줄 관리" data-lightbox /><figcaption>감지 제외 스케줄 관리</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SafeWatcher -->
+    <section class="section section--divider" id="safewatcher">
+      <div class="wrap">
+        <span class="section__label section__label--safe reveal">Project 02</span>
+        <h2 class="section__title reveal">SafeWatcher</h2>
+        <p class="section__lead reveal">
+          웹 관제와 WebView 기반 태블릿 알림, 모바일 친화형 사용자 웹을 제공하는
+          적응형 산업안전 솔루션의 UI/UX입니다.
+        </p>
+
+        <div class="dual-demo reveal">
+          <figure class="dual-demo__mobile">
+            <img src="assets/safewatcher/03-user-mobile-web.gif" alt="모바일 웹" data-lightbox />
+            <figcaption>일반 사용자 전용 모바일 웹</figcaption>
+          </figure>
+          <figure class="dual-demo__pc">
+            <img src="assets/safewatcher/02-user-pc-web.gif" alt="PC 웹" data-lightbox />
+            <figcaption>일반 사용자 전용 PC 웹 — 관제·사고제보 흐름</figcaption>
+          </figure>
+        </div>
+
+        <div class="features">
+          <article class="feature feature--reverse reveal">
+            <div class="feature__content">
+              <p class="feature__step feature__step--safe">01 · RESPONSIVE</p>
+              <h3>PC · 모바일 반응형 사용자 웹</h3>
+              <p>넓은 화면과 모바일 환경 각각에 맞는 레이아웃으로 일반 사용자 전용 서비스 흐름을 설계·구현했습니다.</p>
+            </div>
+            <figure class="feature__visual">
+              <img src="assets/safewatcher/02-user-pc-web.gif" alt="PC 사용자 웹" data-lightbox />
+            </figure>
+          </article>
+
+          <article class="feature reveal">
+            <div class="feature__content">
+              <p class="feature__step feature__step--safe">02 · MOBILE</p>
+              <h3>현장 작업자용 모바일 UX</h3>
+              <p>터치 친화적 인터페이스와 세로 화면에 최적화된 정보 배치로, 현장에서 바로 사용할 수 있는 모바일 웹을 제공합니다.</p>
+            </div>
+            <figure class="feature__visual" style="max-width:320px;margin:0 auto;">
+              <img src="assets/safewatcher/03-user-mobile-web.gif" alt="모바일 사용자 웹" data-lightbox />
+            </figure>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>지민우 · UI/UX Portfolio · <a href="mailto:y2601943@g.yju.ac.kr">y2601943@g.yju.ac.kr</a></p>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <p class="lightbox__label" id="lightboxLabel"></p>
+    <button class="lightbox__close" id="lightboxClose" aria-label="닫기">×</button>
+    <img id="lightboxImg" alt="" />
+  </div>
+
+  <script>
+    (() => {
+      const menuBtn = document.getElementById('menuBtn');
+      const nav = document.getElementById('nav');
+      menuBtn.addEventListener('click', () => document.body.classList.toggle('nav-open'));
+      nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => document.body.classList.remove('nav-open')));
+
+      const reveals = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach(el => io.observe(el));
+
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxLabel = document.getElementById('lightboxLabel');
+      const close = () => {
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+      document.querySelectorAll('[data-lightbox]').forEach(img => {
+        img.addEventListener('click', () => {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+          lightboxLabel.textContent = img.alt;
+          lightbox.classList.add('open');
+          lightbox.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      document.getElementById('lightboxClose').addEventListener('click', close);
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    })();
+  </script>
+</body>
+</html>
